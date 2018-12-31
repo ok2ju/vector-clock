@@ -1,5 +1,5 @@
 const VClock = require('.')
-const { compare } = require('./utils')
+const { compare, isIdentical } = require('./utils')
 
 describe('Vector clock', () => {
   beforeEach(() => {
@@ -48,5 +48,11 @@ describe('utils', () => {
     this.p1.clock = { a: 3, b: 0, c: 0 }
     this.p3.clock = { a: 5, b: 3, c: 3 }
     expect(compare(this.p1, this.p3)).toEqual(-1)
+  })
+
+  test('p1 and p2 are identical', () => {
+    this.p1.clock = { a: 2, b: 2, c: 2 }
+    this.p2.clock = { a: 2, b: 2, c: 2 }
+    expect(isIdentical(this.p1, this.p2)).toBeTruthy()
   })
 })

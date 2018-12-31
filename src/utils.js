@@ -30,5 +30,23 @@ module.exports = {
     }
 
     return 0 // cuncurrent
+  },
+
+  isIdentical: (a, b) => {
+    if (a.clock) a = a.clock
+    if (b.clock) b = b.clock
+
+    return uniqueKeys(a, b).every((key) => {
+      if (typeof a[key] === 'undefined' || typeof b[key] === 'undefined') {
+        return false
+      }
+
+      const diff = (a[key] || 0) - (b[key] || 0)
+      if (diff === 0) {
+        return true
+      }
+
+      return false
+    })
   }
 }
